@@ -32,6 +32,9 @@
 17. STYLE TRANSFER GENERATIVE ADVERSARIAL NETWORKS:
 LEARNING TO PLAY CHESS DIFFERENTLY(ICLR2017)
 18. Borrowing Treasures from the Wealthy: Deep Transfer Learning through Selective Joint Fine-tuning
+19. Stylistic Transfer in Natural Language Generation Systems Using Recurrent Neural Networks(acl2016)：提出了一个style迁移的想法做了一个系统，在训练另一个style的时候固定其他style的参数（latent Representation），但是实验基本没有提及。
+20. GAN for NLP：https://zhuanlan.zhihu.com/p/25168509
+
 
 
 
