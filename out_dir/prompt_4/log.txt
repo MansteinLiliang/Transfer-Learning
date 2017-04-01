@@ -1,0 +1,207 @@
+[INFO] (__main__) Fold 0 begin................
+[INFO] (gensim.models.doc2vec) collecting all words and their counts
+[INFO] (gensim.models.doc2vec) PROGRESS: at example #0, processed 0 words (0/s), 0 word types, 0 tags
+[INFO] (gensim.models.doc2vec) PROGRESS: at example #10000, processed 191694 words (3009326/s), 6518 word types, 10000 tags
+[INFO] (gensim.models.doc2vec) collected 6900 word types and 10914 unique tags from a corpus of 10914 examples and 210594 words
+[INFO] (gensim.models.word2vec) min_count=2 retains 3008 unique words (drops 3892)
+[INFO] (gensim.models.word2vec) min_count leaves 206702 word corpus (98% of original 210594)
+[INFO] (gensim.models.word2vec) deleting the raw counts dictionary of 6900 items
+[INFO] (gensim.models.word2vec) sample=0 downsamples 0 most-common words
+[INFO] (gensim.models.word2vec) downsampling leaves estimated 206702 word corpus (100.0% of prior 206702)
+[INFO] (gensim.models.word2vec) estimated required memory for 3008 words and 300 dimensions: 24002800 bytes
+[INFO] (gensim.models.word2vec) resetting layer weights
+[INFO] (gensim.utils) saving Doc2Vec object under ./data/my_model.doc2vec, separately None
+[INFO] (gensim.utils) not storing attribute syn0norm
+[INFO] (gensim.utils) not storing attribute cum_table
+[INFO] (asap_evaluator) Current evaluation epoch step = (1)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0732, mean: 1.913 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0756, mean: 1.913 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.008, SPR: 0.005, Tau: 0.007 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.017, SPR: -0.027, Tau: -0.021 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (2)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0734, mean: 1.928 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0759, mean: 1.928 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.005, SPR: 0.011, Tau: 0.011 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.018, SPR: -0.027, Tau: -0.020 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (3)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0738, mean: 1.777 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0749, mean: 1.777 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.008, SPR: 0.007, Tau: 0.008 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.017, SPR: -0.029, Tau: -0.022 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (4)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0739, mean: 1.771 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0750, mean: 1.771 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.000, SPR: 0.017, Tau: 0.016 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.018, SPR: -0.027, Tau: -0.020 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (5)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0730, mean: 1.853 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0748, mean: 1.853 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.004, SPR: 0.012, Tau: 0.012 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.017, SPR: -0.028, Tau: -0.022 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (6)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0731, mean: 1.908 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0755, mean: 1.908 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.009, SPR: 0.005, Tau: 0.007 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.016, SPR: -0.029, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (7)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0731, mean: 1.900 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0754, mean: 1.900 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.012, SPR: 0.001, Tau: 0.004 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.016, SPR: -0.029, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (8)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0738, mean: 1.779 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0749, mean: 1.779 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.011, SPR: 0.004, Tau: 0.007 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.018, SPR: -0.032, Tau: -0.025 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (9)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0733, mean: 1.809 (0.622), stdev: 0.001 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0747, mean: 1.809 (0.607), stdev: 0.001 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.011, SPR: -0.001, Tau: 0.003 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.018, SPR: -0.033, Tau: -0.026 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (10)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0745, mean: 1.983 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0776, mean: 1.983 (0.607), stdev: 0.002 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.011, SPR: -0.001, Tau: 0.002 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.018, SPR: -0.034, Tau: -0.026 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (11)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0729, mean: 1.859 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0748, mean: 1.859 (0.607), stdev: 0.002 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.008, SPR: 0.001, Tau: 0.004 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.019, SPR: -0.031, Tau: -0.024 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (12)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0745, mean: 1.749 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0753, mean: 1.749 (0.607), stdev: 0.002 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.002, SPR: -0.000, Tau: 0.003 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.026, SPR: -0.026, Tau: -0.020 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (13)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0735, mean: 1.939 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0762, mean: 1.939 (0.607), stdev: 0.002 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.007, SPR: -0.001, Tau: 0.002 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.033, SPR: -0.026, Tau: -0.020 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (14)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0729, mean: 1.854 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0748, mean: 1.854 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.012, SPR: -0.002, Tau: 0.001 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.044, SPR: -0.025, Tau: -0.018 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (15)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0739, mean: 1.771 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0750, mean: 1.771 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.014, SPR: 0.004, Tau: 0.005 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.042, SPR: -0.028, Tau: -0.021 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (16)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0729, mean: 1.877 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0750, mean: 1.877 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.017, SPR: 0.008, Tau: 0.008 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.040, SPR: -0.030, Tau: -0.022 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (17)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0731, mean: 1.908 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0755, mean: 1.908 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.017, SPR: 0.012, Tau: 0.011 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.041, SPR: -0.031, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (18)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0730, mean: 1.833 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0747, mean: 1.833 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.015, SPR: 0.011, Tau: 0.010 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.039, SPR: -0.032, Tau: -0.024 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (19)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0730, mean: 1.840 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0747, mean: 1.840 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.017, SPR: 0.011, Tau: 0.010 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.039, SPR: -0.031, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (20)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0745, mean: 1.748 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0753, mean: 1.748 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.018, SPR: 0.012, Tau: 0.010 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.038, SPR: -0.030, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (21)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0732, mean: 1.813 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0747, mean: 1.813 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.021, SPR: 0.013, Tau: 0.011 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.038, SPR: -0.032, Tau: -0.024 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (22)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0748, mean: 1.997 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0781, mean: 1.997 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.022, SPR: 0.013, Tau: 0.011 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.035, SPR: -0.031, Tau: -0.023 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (23)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0732, mean: 1.814 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0747, mean: 1.814 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.023, SPR: 0.016, Tau: 0.013 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.034, SPR: -0.030, Tau: -0.022 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (24)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0754, mean: 1.718 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0759, mean: 1.718 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.020, SPR: 0.014, Tau: 0.012 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.030, SPR: -0.032, Tau: -0.024 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (25)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0741, mean: 1.763 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0751, mean: 1.763 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.015, SPR: 0.013, Tau: 0.012 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.028, SPR: -0.034, Tau: -0.026 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (26)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0757, mean: 2.025 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0792, mean: 2.025 (0.607), stdev: 0.002 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: -0.006, SPR: 0.007, Tau: 0.008 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.020, SPR: -0.038, Tau: -0.030 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (27)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0730, mean: 1.890 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0752, mean: 1.890 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.004, SPR: 0.014, Tau: 0.013 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.022, SPR: -0.036, Tau: -0.027 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (28)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0735, mean: 1.792 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0748, mean: 1.792 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.008, SPR: 0.014, Tau: 0.013 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.024, SPR: -0.037, Tau: -0.028 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (29)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0744, mean: 1.983 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0776, mean: 1.983 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.001, SPR: 0.012, Tau: 0.011 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.021, SPR: -0.037, Tau: -0.028 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (30)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0744, mean: 1.751 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0753, mean: 1.751 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.015, SPR: 0.017, Tau: 0.014 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.026, SPR: -0.034, Tau: -0.025 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (31)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0755, mean: 1.713 (0.622), stdev: 0.002 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0760, mean: 1.713 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.018, SPR: 0.019, Tau: 0.017 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.025, SPR: -0.034, Tau: -0.025 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
+[INFO] (asap_evaluator) Current evaluation epoch step = (32)
+[INFO] (asap_evaluator) [Dev]   loss: 0.0735, mean: 1.941 (0.622), stdev: 0.003 (0.271)
+[INFO] (asap_evaluator) [Test]  loss: 0.0763, mean: 1.941 (0.607), stdev: 0.003 (0.273)
+[INFO] (asap_evaluator) [DEV]   QWK:  0.000, LWK: 0.000, PRS: 0.023, SPR: 0.021, Tau: 0.018 (Best @ 1: {{0.000}}, 0.000, -0.008, 0.005, 0.007)
+[INFO] (asap_evaluator) [TEST]  QWK:  0.000, LWK: 0.000, PRS: -0.024, SPR: -0.032, Tau: -0.024 (Best @ 1: {{0.000}}, 0.000, -0.017, -0.027, -0.021)
+[INFO] (asap_evaluator) --------------------------------------------------------------------------------------------------------------------------
