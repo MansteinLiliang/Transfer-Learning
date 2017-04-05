@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import codecs
 import os
 import itertools
@@ -18,8 +19,7 @@ from collections import OrderedDict
 from collections import namedtuple
 import sys
 from sklearn.utils import shuffle
-import data_utils as D
-
+from . import data_utils as D
 
 logger = logging.getLogger(__name__)
 D.set_logger(logger)
@@ -67,13 +67,13 @@ def define_tensor_size(prompt_id):
 
 def save_pkl(path, obj):
   with open(path, 'w') as f:
-    cPickle.dump(obj, f)
+    pk.dump(obj, f)
     print(" [*] save %s" % path)
 
 
 def load_pkl(path):
   with open(path) as f:
-    obj = cPickle.load(f)
+    obj = pk.load(f)
     print(" [*] load %s" % path)
     return obj
 
@@ -134,14 +134,9 @@ def convert_to_dataset_friendly_scores(scores_array, prompt_id_array):
     arg_type = type(prompt_id_array)
     assert arg_type in {int, np.ndarray}
     if arg_type is int:
-        print scores_array
         low, high = asap_ranges[prompt_id_array]
         scores_array = scores_array * (high - low) + low
-        # assert np.all(scores_array >= low) and np.all(scores_array <= high)
-        scores_array = np.where(
-            scores_array > high, high,
-            np.where(scores_array < low, low, scores_array)
-        )
+        assert np.all(scores_array >= low) and np.all(scores_array <= high)
     else:
         assert scores_array.shape[0] == prompt_id_array.shape[0]
         dim = scores_array.shape[0]
@@ -150,8 +145,26 @@ def convert_to_dataset_friendly_scores(scores_array, prompt_id_array):
         for ii in range(dim):
             low[ii], high[ii] = asap_ranges[prompt_id_array[ii]]
         scores_array = scores_array * (high - low) + low
-    print scores_array
     return scores_array
+    arg_type = type(prompt_id_array)
+    # assert arg_type in {int, np.ndarray}
+    # if arg_type is int:
+    #     low, high = asap_ranges[prompt_id_array]
+    #     scores_array = scores_array * (high - low) + low
+    #     # assert np.all(scores_array >= low) and np.all(scores_array <= high)
+    #     scores_array = np.where(
+    #         scores_array > high, high,
+    #         np.where(scores_array < low, low, scores_array)
+    #     )
+    # else:
+    #     assert scores_array.shape[0] == prompt_id_array.shape[0]
+    #     dim = scores_array.shape[0]
+    #     low = np.zeros(dim)
+    #     high = np.zeros(dim)
+    #     for ii in range(dim):
+    #         low[ii], high[ii] = asap_ranges[prompt_id_array[ii]]
+    #     scores_array = scores_array * (high - low) + low
+    # return scores_array
 
 
 def is_number(token):
@@ -334,17 +347,18 @@ def train_batch_generator(X, masks, y, doc_num=1, axis=1):
             '''
 
     while True:
-        if masks == None:
-            X_new, y_new = shuffle(X, y, random_state=np.random.randint(0, 100))
-            print "epoch: " + str(epoch) + " begin......"
-            for i in xrange(doc_num, len(X_new), doc_num):
-                yield epoch, X_new[i - doc_num:i], np.hstack(y_new[i - doc_num:i])
+        if masks is None:
+            X_new, y_new = shuffle(X, y)
+            print("epoch: " + str(epoch) + " begin......")
+            for i in range(0, len(X_new), doc_num):
+                # yield epoch, X_new[i - doc_num:i], y_new[i - doc_num:i]
+                yield epoch, X_new[i:i+doc_num], y_new[i:i+doc_num]
             epoch += 1
         else:
             X_new, masks_new, y_new = shuffle(X.transpose((1,0)), masks.transpose((1, 0)), y, random_state=0)
             X_new, masks_new = X_new.transpose((1, 0)), masks.transpose((1, 0))
-            print "epoch: " + str(epoch) + " begin......"
-            for i in xrange(doc_num, X_new.shape[1],doc_num):
+            print("epoch: " + str(epoch) + " begin......")
+            for i in range(doc_num, X_new.shape[1], doc_num):
                 yield epoch, np.concatenate(X_new[i-doc_num:i], axis=axis), np.hstack(masks_new[i-doc_num:i]), np.hstack(y_new[i-doc_num:i])
                 # yield epoch, np.hstack(X_new[i-doc_num:i]), np.ones(shape=(50, 1600), dtype='int32'), np.hstack(y_new[i-doc_num:i])
             epoch += 1
@@ -359,7 +373,7 @@ def dev_test_batch_generator(X, masks, y, doc_num=1):
     :param doc_num:
     :return:
     """
-    for i in xrange(0, len(X), doc_num):
+    for i in range(0, len(X), doc_num):
         #   I utilize the indexing trick, out of range index will automated detected
         yield np.concatenate(X[i:i+doc_num],1), np.hstack(masks[i:i+doc_num]), np.hstack(y[i:i+doc_num])
 
@@ -559,8 +573,8 @@ class TextReader(object):
         return raw_data
 
     def onehot(self, data, min_length=None):
-        if min_length == None:
-          min_length = self.vocab_size
+        if min_length is None:
+            min_length = self.vocab_size
         return np.where(np.bincount(data, minlength=min_length)>=1, 1, 0)
 
     def gen_nvdm_feats(self, model, data_type="train"):
@@ -629,8 +643,8 @@ class TextReader(object):
                get_model_friendly_scores(np.array(self.train_scores).astype('float32'), self.prompt1)
         while True:
             X_new, y_new = shuffle(X, y, random_state=1)
-            print "epoch: " + str(epoch) + " begin......"
-            for i in xrange(batch_size, len(X_new), batch_size):
+            print("epoch: " + str(epoch) + " begin......")
+            for i in range(batch_size, len(X_new), batch_size):
                 batch = X_new[i - batch_size:i]
                 # length = self.arrays_max_len(batch)
                 # batch = sequence.pad_sequences(batch, min(length, max_len), padding='post')

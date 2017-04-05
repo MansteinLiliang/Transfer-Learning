@@ -1,5 +1,6 @@
 #pylint: skip-file
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from __future__ import absolute_import
 import logging
 import time
@@ -46,9 +47,9 @@ def main():
             test_y = dataset.get_model_friendly_scores(test_y_org, prompt_id)
             query = dataset.get_query(prompt_id, vocab, sent_len)
 
-            print 'dev_y_org as integer...'
-            print "#word size = ", vocab_size
-            print "#real word size = ", real_vocab_size
+            print('dev_y_org as integer...')
+            print("#word size = ", vocab_size)
+            print("#real word size = ", real_vocab_size)
 
             # TODO We should try different word-embedding
             # word-embedding1
@@ -80,21 +81,22 @@ def main():
             #   dev_y_org is like[8,10,2,10,...] not in range(0,1.0)
             #   dev_y is in range(0, 1.0)
             evl = Evaluator(dataset, prompt_id, 'None', dev_y_org.astype('int32'), test_y_org.astype('int32'))
-            print "training..."
+            print("training...")
             train_batch = dataset.train_batch_generator(train_x, train_masks, train_y, doc_num)
             start = time.time()
             pre_epoch = 1
-            for i in xrange(3000):
+            for i in range(3000):
                 epoch, X, mask, y = train_batch.next()
                 in_start = time.time()
                 true_cost, pred = model.train(X, np.asarray(mask, dtype=theano.config.floatX), lr, y, doc_num)
                 if epoch > pre_epoch and epoch > 10:
-                    print "Starting evaluation: " + str(epoch) + " time"
+                    print("Starting evaluation: " + str(epoch) + " time")
                     in_start = time.time()
                     evl.evaluate(dev_x, dev_masks, dev_y, test_x, test_masks, test_y, model, epoch-10)
                     in_time = time.time() - in_start
-                    print "Evaluation: "+ str(epoch-10)+ " spent Time = " + str(in_time)[:3]
-                    print "Epoch = %d, Iter = %d, Error = %s, Time = %s" % (pre_epoch, i, str(true_cost)[:6], str(in_time)[:3])
+                    print("Evaluation: "+ str(epoch-10)+ " spent Time = " + str(in_time)[:3])
+                    print("Epoch = %d, Iter = %d, Error = %s, Time = %s" %
+                          (pre_epoch, i, str(true_cost)[:6], str(in_time)[:3]))
                     pre_epoch = epoch
                 if epoch > 100:
                     fold_best_dev.append(evl.best_dev[0])
@@ -109,7 +111,7 @@ def main():
             'Prompt_%d, (Dev Best: {{%.3f}}) (Test Best: {{%.3f}}), Time: %s'
             % (prompt_id, np.mean(fold_best_dev), np.mean(fold_best_test), str(in_time)[:4])
         )
-    print "Finished. Time = " + str(time.time() - start)[:3]
+    print("Finished. Time = " + str(time.time() - start)[:3])
         # print "save model..."
         # save_model("./model/hed.model", model)
 

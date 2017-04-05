@@ -3,9 +3,9 @@ import numpy as np
 import theano
 import theano.tensor as T
 
-from gru import *
-from lstm import *
-from updates import *
+from .gru import *
+from .lstm import *
+from .updates import *
 
 class WordEncoderLayer(object):
     def __init__(self, rng, X, in_size, out_size, hidden_size,

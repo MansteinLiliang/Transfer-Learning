@@ -2,7 +2,7 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from utils_pg import *
+from .utils_pg import *
 
 class LSTMLayer(object):
     def __init__(self, rng, layer_id, shape, X, mask, is_train = 1, batch_size = 1, p = 0.5):

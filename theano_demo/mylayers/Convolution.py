@@ -8,8 +8,8 @@ init_weights = layer_utils.init_weights
 init_bias = layer_utils.init_bias
 ReLU = layer_utils.ReLU
 from theano.tensor.nnet import conv
-from theano.tensor.signal import downsample
-from encoding_layer import SentEncoderLayer
+from theano.tensor.signal import pool
+from .encoding_layer import SentEncoderLayer
 
 
 class DocConvolution(object):
@@ -50,7 +50,7 @@ class DocConvolution(object):
         #                                      ignore_border=True)
 
         self.activation = conv_out_relu.reshape((self.doc_num, self.out_size, self.doc_len - filter_width + 1)).dimshuffle([0, 2, 1])
-        self.pooling = downsample.max_pool_2d(
+        self.pooling = pool.pool_2d(
             input=conv_out_relu,
             ds=(1, self.doc_len - filter_width + 1),
             ignore_border=True

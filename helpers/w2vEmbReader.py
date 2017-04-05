@@ -10,7 +10,7 @@ class W2VEmbReader:
 		logger.info('Loading embeddings from: ' + emb_path)
 		has_header=False
 		with codecs.open(emb_path, 'r', encoding='utf8') as emb_file:
-			tokens = emb_file.next().split()
+			tokens = emb_file.readline().split()
 			if len(tokens) == 2:
 				try:
 					int(tokens[0])
@@ -20,7 +20,7 @@ class W2VEmbReader:
 					pass
 		if has_header:
 			with codecs.open(emb_path, 'r', encoding='utf8') as emb_file:
-				tokens = emb_file.next().split()
+				tokens = emb_file.readline().split()
 				assert len(tokens) == 2, 'The first line in W2V embeddings must be the pair (vocab_size, emb_dim)'
 				self.vocab_size = int(tokens[0])
 				self.emb_dim = int(tokens[1])
@@ -68,7 +68,7 @@ class W2VEmbReader:
 		counter = 0.
 		# emb_matrix = np.zeros(shape=(len(vocab), self.emb_dim), dtype='float32')
 		# return emb_matrix
-		for word, index in vocab.iteritems():
+		for word, index in vocab.items():
 			try:
 				emb_matrix[index] = self.embeddings[word]
 				counter += 1

@@ -9,8 +9,7 @@ init_weights = layer_utils.init_weights
 init_bias = layer_utils.init_bias
 ReLU = layer_utils.ReLU
 from theano.tensor.nnet import conv
-from theano.tensor.signal import downsample
-
+from theano.tensor.signal import pool
 
 class ConvolutionAttention(object):
     def ReLU(self, x):
@@ -48,12 +47,12 @@ class ConvolutionAttention(object):
 
         if self.non_linear == "tanh":
             conv_out_tanh = T.tanh(conv_out + self.b.dimshuffle('x', 0, 'x', 'x'))
-            self.output = downsample.max_pool_2d(input=conv_out_tanh, ds=(1, self.num_sents-2), ignore_border=True)
+            self.output = pool.pool_2d(input=conv_out_tanh, ds=(1, self.num_sents-2), ignore_border=True)
         elif self.non_linear == "relu":
             conv_out_relu = self.ReLU(conv_out + self.b.dimshuffle('x', 0, 'x', 'x'))
-            self.output = downsample.max_pool_2d(input=conv_out_relu, ds=(1, self.num_sents-2), ignore_border=True)
+            self.output = pool.pool_2d(input=conv_out_relu, ds=(1, self.num_sents-2), ignore_border=True)
         else:
-            pooled_out = downsample.max_pool_2d(input=conv_out, ds=(1, self.num_sents-2), ignore_border=True)
+            pooled_out = pool.pool_2d(input=conv_out, ds=(1, self.num_sents-2), ignore_border=True)
             self.output = pooled_out + self.b.dimshuffle('x', 0, 'x', 'x')
         self.params = [self.W, self.b]
         self.activation = self.output.reshape((self.batch_docs, self.in_size))

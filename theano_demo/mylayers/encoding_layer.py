@@ -2,8 +2,8 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from gru_layer import GRULayer, BdGRU
-from lstm_layer import LSTMLayer, BdLSTM
+from .gru_layer import GRULayer, BdGRU
+from .lstm_layer import LSTMLayer, BdLSTM
 
 
 class SentEncoderLayer(object):

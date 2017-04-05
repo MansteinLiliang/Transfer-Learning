@@ -1,9 +1,10 @@
 # pylint: skip-file
+from __future__ import print_function
 from helpers.theano_optimizers import *
-from mylayers.Convolution import SentenceConvolution, DocConvolution
-from mylayers.attention import SyntaxAttentionLayer, DocLevelAttention
-from mylayers.encoding_layer import DocEncoderLayer
-from mylayers.layer_utils import init_weights, init_bias, MultiPerceptron
+from .mylayers.Convolution import SentenceConvolution, DocConvolution
+from .mylayers.attention import SyntaxAttentionLayer, DocLevelAttention
+from .mylayers.encoding_layer import DocEncoderLayer
+from .mylayers.layer_utils import init_weights, init_bias, MultiPerceptron
 import theano.tensor as T
 import theano
 
@@ -37,7 +38,7 @@ class MLP(object):
         b_out = init_bias(1, 'mse_b', value=0.0)
         self.params += [W_out, b_out]
         y_pred = T.dot(X, W_out)+b_out
-        print 'compile the mse'
+        print('compile the mse')
         self.cost = T.mean(T.square((y_pred-y.reshape((self.batch_docs, 1)))))
         # self.cost = T.pow(y_pred-y.reshape((self.batch_docs, 1)), 2).mean()
         clip = theano.gradient.grad_clip(self.cost, -1.0, 1.0)
@@ -166,7 +167,7 @@ class SynModel(object):
         b_out = init_bias(1, 'mse_b', value=0.0)
         self.params += [W_out, b_out]
         y_pred = T.dot(X, W_out)+b_out
-        print 'compile the mse'
+        print('compile the mse')
         self.cost = T.mean(T.square((y_pred-y.reshape((self.batch_docs, 1)))))
         # self.cost = T.pow(y_pred-y.reshape((self.batch_docs, 1)), 2).mean()
         clip = theano.gradient.grad_clip(self.cost, -1.0, 1.0)
@@ -323,7 +324,7 @@ class HierarchicalModel(object):
         self.params += [W_out, b_out]
 
         y_pred = T.dot(X, W_out)+b_out
-        print 'compile the mse'
+        print('compile the mse')
         self.cost = T.mean(T.square((y_pred-y.reshape((self.batch_docs, 1)))))
         # self.cost = T.pow(y_pred-y.reshape((self."batch_docs, 1)), 2).mean()
         clip = theano.gradient.grad_clip(self.cost, -1.0, 1.0)

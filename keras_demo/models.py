@@ -1,5 +1,8 @@
+from __future__ import absolute_import
 import numpy as np
 import logging
+import keras
+
 
 logger = logging.getLogger(__name__)
 
@@ -9,12 +12,11 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
     from keras.layers.embeddings import Embedding
     from keras.models import Sequential, Model
     from keras.layers.core import Dense, Dropout, Activation
-    from nea.my_layers import Attention, MeanOverTime, Conv1DWithMasking
+    from .my_layers import Attention, MeanOverTime, Conv1DWithMasking
 
     ###############################################################################################################################
     ## Recurrence unit type
     #
-
     if args.recurrent_unit == 'lstm':
         from keras.layers.recurrent import LSTM as RNN
     elif args.recurrent_unit == 'gru':
@@ -27,7 +29,7 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
     #
 
     dropout_W = 0.5  # default=0.5
-    dropout_U = 0.1  # default=0.1
+    dropout_U = 0.5  # default=0.1
     cnn_border_mode = 'same'
     if initial_mean_value.ndim == 0:
         initial_mean_value = np.expand_dims(initial_mean_value, axis=1)
@@ -39,8 +41,8 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
     elif args.model_type == 'reg':
         logger.info('Building a REGRESSION model')
         model = Sequential()
-        model.add(Embedding(args.vocab_size, args.emb_dim, mask_zero=True, trainable=False))
-        # model.add(Embedding(args.vocab_size, args.emb_dim, mask_zero=True, trainable=True))
+        # model.add(Embedding(args.vocab_size, args.emb_dim, mask_zero=True, trainable=False))
+        model.add(Embedding(args.vocab_size, args.emb_dim, mask_zero=True, trainable=True))
         if args.cnn_dim > 0:
             model.add(Conv1DWithMasking(nb_filter=args.cnn_dim, filter_length=args.cnn_window_size,
                                         border_mode=cnn_border_mode, subsample_length=1))
@@ -49,9 +51,10 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
         if args.dropout_prob > 0:
             model.add(Dropout(args.dropout_prob))
         model.add(Dense(num_outputs))
-        if not args.skip_init_bias:
-            bias_value = (np.log(initial_mean_value) - np.log(1 - initial_mean_value)).astype(K.floatx())
-            model.layers[-1].b.set_value(bias_value)
+        # if not args.skip_init_bias:
+        #     bias_value = (np.log(initial_mean_value) - np.log(1 - initial_mean_value)).astype(K.floatx())
+            # model.layers[-1].b.set_value(bias_value)
+            # model.layers[-1].bias_initializer = keras.initializers.Constant(value=bias_value)
         model.add(Activation('sigmoid'))
         model.emb_index = 0
 
@@ -73,7 +76,8 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
         model.add(Dense(num_outputs))
         if not args.skip_init_bias:
             bias_value = (np.log(initial_mean_value) - np.log(1 - initial_mean_value)).astype(K.floatx())
-            model.layers[-1].b.set_value(bias_value)
+            # model.layers[-1].b.set_value(bias_value)
+            model.layers[-1].bias_initializer = keras.initializers.Constant(value=bias_value)
         model.add(Activation('sigmoid'))
         model.emb_index = 0
 
@@ -134,7 +138,7 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
     #
 
     if args.emb_path:
-        from w2vEmbReader import W2VEmbReader as EmbReader
+        from .w2vEmbReader import W2VEmbReader as EmbReader
         logger.info('Initializing lookup table')
         emb_reader = EmbReader(args.emb_path, emb_dim=args.emb_dim)
         model.layers[model.emb_index].W.set_value(

@@ -2,9 +2,9 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from utils_pg import *
-from lstm import *
-from gru import *
+from .utils_pg import *
+from .lstm import *
+from .gru import *
 
 class SentDecoderLayer(object):
     def __init__(self, cell, rng, layer_id, shape, X, mask, is_train = 1, batch_size = 1, p = 0.5):

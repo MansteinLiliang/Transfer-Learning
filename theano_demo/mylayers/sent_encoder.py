@@ -2,9 +2,9 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from utils_pg import *
-from gru import *
-from lstm import *
+from .utils_pg import *
+from .gru import *
+from .lstm import *
 
 
 class SentEncoderLayer(object):

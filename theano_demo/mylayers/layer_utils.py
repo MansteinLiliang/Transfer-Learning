@@ -2,7 +2,7 @@
 import numpy as np
 import theano
 import theano.tensor as T
-import cPickle as pickle
+import pickle as pickle
 # set use gpu programatically
 import theano.sandbox.cuda
 

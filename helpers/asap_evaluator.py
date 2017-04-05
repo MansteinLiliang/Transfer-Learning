@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+from __future__ import print_function
 from scipy.stats import pearsonr, spearmanr, kendalltau
 import logging
 import numpy as np
-from my_kappa_calculator import quadratic_weighted_kappa as qwk
-from my_kappa_calculator import linear_weighted_kappa as lwk
+from .my_kappa_calculator import quadratic_weighted_kappa as qwk
+from .my_kappa_calculator import linear_weighted_kappa as lwk
 import theano
-import data_utils as U
+from . import data_utils as U
 
 class Evaluator():
 	def __init__(self, dataset, prompt_id, out_dir, dev_y_org, test_y_org, batch_size=128):
@@ -34,14 +36,6 @@ class Evaluator():
 		return dev_prs, test_prs, dev_spr, test_spr, dev_tau, test_tau
 		# self.dump_ref_scores()
 
-	# def dump_ref_scores(self):
-	#     np.savetxt(self.out_dir + '/preds/dev_ref.txt', self.dev_y_org, fmt='%i')
-	#     np.savetxt(self.out_dir + '/preds/test_ref.txt', self.test_y_org, fmt='%i')
-
-	# def dump_predictions(self, dev_pred, test_pred, epoch):
-	#    np.savetxt(self.out_dir + '/preds/dev_pred_' + str(epoch) + '.txt', dev_pred, fmt='%.8f')
-	#    np.savetxt(self.out_dir + '/preds/test_pred_' + str(epoch) + '.txt', test_pred, fmt='%.8f')
-	# 	return
 	def calc_qwk(self, dev_pred, test_pred):
 		# Kappa only supports integer values
 		dev_pred_int = np.rint(dev_pred).astype('int32')

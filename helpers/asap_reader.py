@@ -88,14 +88,14 @@ def load_vocab(vocab_path):
     return vocab
 
 
-def create_vocab(file_path, prompt_id, maxlen, vocab_size):
+def create_vocab(file_path, prompt_id, maxlen, vocab_size, tokenize_text, to_lower):
     logger.info('Creating vocabulary from: ' + file_path)
     if maxlen > 0:
         logger.info('  Removing sequences with more than ' + str(maxlen) + ' words')
     total_words, unique_words = 0, 0
     word_freqs = {}
     with codecs.open(file_path, mode='r', encoding='UTF8') as input_file:
-        input_file.next()
+        input_file.readline()
         for line in input_file:
             tokens = line.strip().split('\t')
             essay_id = int(tokens[0])
@@ -103,8 +103,12 @@ def create_vocab(file_path, prompt_id, maxlen, vocab_size):
             content = tokens[2].strip()
             score = float(tokens[6])
             if essay_set == prompt_id or prompt_id <= 0:
-                content = content.lower()
-                content = tokenize(content)
+                if to_lower:
+                    content = content.lower()
+                if tokenize_text:
+                    content = tokenize(content)
+                else:
+                    content = content.split()
                 if maxlen > 0 and len(content) > maxlen:
                     continue
                 for word in content:
@@ -137,7 +141,7 @@ def read_essays(file_path, prompt_id):
     essays_list = []
     essays_ids = []
     with codecs.open(file_path, mode='r', encoding='UTF8') as input_file:
-        input_file.next()
+        input_file.readline()
         for line in input_file:
             tokens = line.strip().split('\t')
             if int(tokens[1]) == prompt_id or prompt_id <= 0:
@@ -146,15 +150,15 @@ def read_essays(file_path, prompt_id):
     return essays_list, essays_ids
 
 
-def read_dataset(file_path, prompt_id, maxlen, vocab, score_index=6):
+def read_dataset(file_path, prompt_id, maxlen, vocab, tokenize_text, to_lower, score_index=6, char_level=False):
     logger.info('Reading dataset from: ' + file_path)
     if maxlen > 0:
         logger.info('  Removing sequences with more than ' + str(maxlen) + ' words')
     data_x, data_y, prompt_ids = [], [], []
     num_hit, unk_hit, total = 0., 0., 0.
     maxlen_x = -1
-    with codecs.open(file_path, mode='r', encoding='UTF8') as input_file:
-        input_file.next()
+    with codecs.open(file_path, mode='r', encoding='UTF8', errors="ignore") as input_file:
+        input_file.readline()
         for line in input_file:
             tokens = line.strip().split('\t')
             essay_id = int(tokens[0])
@@ -162,36 +166,47 @@ def read_dataset(file_path, prompt_id, maxlen, vocab, score_index=6):
             content = tokens[2].strip()
             score = float(tokens[score_index])
             if essay_set == prompt_id or prompt_id <= 0:
-                content = content.lower()
-                content = tokenize(content)
+                if to_lower:
+                    content = content.lower()
+                if char_level:
+                    # content = list(content)
+                    raise NotImplementedError
+                else:
+                    if tokenize_text:
+                        content = tokenize(content)
+                    else:
+                        content = content.split()
                 if maxlen > 0 and len(content) > maxlen:
                     continue
                 indices = []
-                for word in content:
-                    if is_number(word):
-                        indices.append(vocab['<num>'])
-                        num_hit += 1
-                    elif word in vocab:
-                        indices.append(vocab[word])
-                    else:
-                        indices.append(vocab['<unk>'])
-                        unk_hit += 1
-                    total += 1
+                if char_level:
+                    raise NotImplementedError
+                else:
+                    for word in content:
+                        if is_number(word):
+                            indices.append(vocab['<num>'])
+                            num_hit += 1
+                        elif word in vocab:
+                            indices.append(vocab[word])
+                        else:
+                            indices.append(vocab['<unk>'])
+                            unk_hit += 1
+                        total += 1
                 data_x.append(indices)
                 data_y.append(score)
                 prompt_ids.append(essay_set)
                 if maxlen_x < len(indices):
                     maxlen_x = len(indices)
     logger.info('  <num> hit rate: %.2f%%, <unk> hit rate: %.2f%%' % (100 * num_hit / total, 100 * unk_hit / total))
-    logger.info('maxlen of prompt%d is %d' % (prompt_id, maxlen_x))
     return data_x, data_y, prompt_ids, maxlen_x
 
 
-def get_data(paths, prompt_id, vocab_size, maxlen, vocab_path=None, score_index=6):
+def get_data(paths, prompt_id, vocab_size, maxlen, tokenize_text=True, to_lower=True, sort_by_len=False,
+             vocab_path=None, score_index=6):
     train_path, dev_path, test_path = paths[0], paths[1], paths[2]
 
     if not vocab_path:
-        vocab = create_vocab(train_path, prompt_id, maxlen, vocab_size)
+        vocab = create_vocab(train_path, prompt_id, maxlen, vocab_size, tokenize_text, to_lower)
         if len(vocab) < vocab_size:
             logger.warning('The vocabualry includes only %i words (less than %i)' % (len(vocab), vocab_size))
         else:
@@ -203,11 +218,12 @@ def get_data(paths, prompt_id, vocab_size, maxlen, vocab_path=None, score_index=
                 'The vocabualry includes %i words which is different from given: %i' % (len(vocab), vocab_size))
     logger.info('  Vocab size: %i' % (len(vocab)))
 
-    train_x, train_y, train_prompts, train_maxlen = read_dataset(train_path, prompt_id, maxlen, vocab)
-    dev_x, dev_y, dev_prompts, dev_maxlen = read_dataset(dev_path, prompt_id, 0, vocab)
-    test_x, test_y, test_prompts, test_maxlen = read_dataset(test_path, prompt_id, 0, vocab)
-
+    train_x, train_y, train_prompts, train_maxlen = read_dataset(train_path, prompt_id, 0, vocab, tokenize_text,
+                                                                 to_lower)
+    dev_x, dev_y, dev_prompts, dev_maxlen = read_dataset(dev_path, prompt_id, 0, vocab, tokenize_text, to_lower)
+    test_x, test_y, test_prompts, test_maxlen = read_dataset(test_path, prompt_id, 0, vocab, tokenize_text, to_lower)
     overal_maxlen = max(train_maxlen, dev_maxlen, test_maxlen)
 
     return (
-    (train_x, train_y, train_prompts), (dev_x, dev_y, dev_prompts), (test_x, test_y, test_prompts), vocab, overal_maxlen)
+    (train_x, train_y, train_prompts), (dev_x, dev_y, dev_prompts), (test_x, test_y, test_prompts), vocab, len(vocab),
+    overal_maxlen, 1)

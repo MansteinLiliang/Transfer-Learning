@@ -1,5 +1,7 @@
 # pylint: skip-file
 
+import theano.tensor as T
+from .utils_pg import *
 
 class LSTMLayer(object):
     def __init__(self, rng, layer_name, X, shape, mask, total_sents, is_train=1, p=0.5):

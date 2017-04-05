@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="df3c3d57-8d94-4213-9e5a-289703a047dd" name="mmr6" url="http://mmr6.pkuml.com">
+        <fileTransfer host="mmr6.pkuml.com" port="22" rootFolder="/home/zhanglechun/liliang" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="51e35db6-c6bf-4095-afa9-28a7ea138a37" name="megatron" url="http://megatron.pkuml.com">
+        <fileTransfer host="megatron.pkuml.com" port="22" rootFolder="/home/zhanglechun" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
