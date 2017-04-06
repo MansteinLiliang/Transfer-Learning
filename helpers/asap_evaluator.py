@@ -46,6 +46,20 @@ class Evaluator():
 		test_lwk = lwk(self.test_y_org, test_pred_int, self.low, self.high)
 		return dev_qwk, test_qwk, dev_lwk, test_lwk
 
+	def calc_dev_qwk(self, dev_pred):
+		# Kappa only supports integer values
+		dev_pred_int = np.rint(dev_pred).astype('int32')
+		dev_qwk = qwk(self.dev_y_org, dev_pred_int, self.low, self.high)
+		dev_lwk = lwk(self.dev_y_org, dev_pred_int, self.low, self.high)
+		return dev_qwk, dev_lwk
+
+	def calc_test_qwk(self, test_pred):
+		# Kappa only supports integer values
+		test_pred_int = np.rint(test_pred).astype('int32')
+		test_qwk = qwk(self.test_y_org, test_pred_int, self.low, self.high)
+		test_lwk = lwk(self.test_y_org, test_pred_int, self.low, self.high)
+		return test_qwk, test_lwk
+
 	def predict(self, model, x, masks, y, batch_size, feats=None):
 		my_batch = self.dataset.dev_test_batch_generator(x, masks, y, batch_size, feats=feats)
 		y_pred = []
@@ -63,20 +77,28 @@ class Evaluator():
 			count += 1.0
 		return np.array(y_pred), total_cost / count
 
-	def feature_evaluate(self, dev_pred, test_pred):
+	def feature_evaluate(self, dev_pred, test_pred=None):
 		logger = self.logger
 		self.dev_pred = self.dataset.convert_to_dataset_friendly_scores(dev_pred, self.prompt_id)
-		self.test_pred = self.dataset.convert_to_dataset_friendly_scores(test_pred, self.prompt_id)
-		self.dev_qwk, self.test_qwk, self.dev_lwk, self.test_lwk = self.calc_qwk(self.dev_pred, self.test_pred)
-		logger.info(
-			'[DEV]   QWK:  %.3f, LWK: %.3f, ',
-			self.dev_qwk, self.dev_lwk
-		)
-		logger.info(
-			'[TEST]  QWK:  %.3f, LWK: %.3f',
-			self.test_qwk, self.test_lwk
-		)
-		return
+		if test_pred is not None:
+			self.test_pred = self.dataset.convert_to_dataset_friendly_scores(test_pred, self.prompt_id)
+			self.dev_qwk, self.test_qwk, self.dev_lwk, self.test_lwk = self.calc_qwk(self.dev_pred, self.test_pred)
+			logger.info(
+				'[DEV]   QWK:  %.3f, LWK: %.3f, ',
+				self.dev_qwk, self.dev_lwk
+			)
+			logger.info(
+				'[TEST]  QWK:  %.3f, LWK: %.3f',
+				self.test_qwk, self.test_lwk
+			)
+			return (self.dev_qwk, self.test_qwk)
+		else:
+			self.dev_qwk, self.dev_lwk = self.calc_dev_qwk(self.dev_pred)
+			logger.info(
+				'[DEV]   QWK:  %.3f, LWK: %.3f, ',
+				self.dev_qwk, self.dev_lwk
+			)
+			return (self.dev_qwk,)
 
 	def evaluate(self, dev_x, dev_masks, dev_y, test_x, test_masks, test_y, model, epoch, print_info=True, dev_feats=None, test_feats=None):
 		self.dev_mean, self.test_mean, self.dev_std, self.test_std = np.array(dev_y).mean(), np.array(

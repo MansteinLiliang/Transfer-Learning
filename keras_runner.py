@@ -1,15 +1,14 @@
 from __future__ import print_function
 import time
 import numpy as np
-import theano
 import sys
 import os
 from helpers import dataset
 from helpers.asap_evaluator import Evaluator
-from theano_demo.mylayers.layer_utils import floatX
 from helpers.w2vEmbReader import W2VEmbReader
 import argparse
 import os
+import keras
 
 # configuration
 lr = 0.001
@@ -47,6 +46,7 @@ def main():
 
     from keras.preprocessing import sequence
     train_x = sequence.pad_sequences(train_x, max_time_steps, padding='post')
+
     dev_x = sequence.pad_sequences(dev_x, max_time_steps, padding='post')
     dev_y_org = dev_y.astype('int')
     test_y_org = test_y.astype('int')
@@ -58,8 +58,8 @@ def main():
     # word-embedding1
     emb_path = "./data/En_vectors.txt"
     emb_reader = W2VEmbReader(emb_path, emb_dim=word_embedding_size)
-    U = floatX(np.random.uniform(-0.05, 0.05, size=(vocab_size, word_embedding_size)))
-    U[0] = np.zeros(shape=(word_embedding_size, ), dtype=theano.config.floatX)
+    U = np.random.uniform(-0.05, 0.05, size=(vocab_size, word_embedding_size)).astype(K.floatx())
+    U[0] = np.zeros(shape=(word_embedding_size, ), dtype=K.floatx())
     U = emb_reader.get_emb_matrix_given_vocab(vocab, U)
 
     # from keras.models import Sequential
@@ -95,18 +95,22 @@ def main():
     args.emb_dim = 50
     args.cnn_dim = 0
     args.dropout_prob = 0.5
+    args.vocab_size = vocab_size
+    args.emb_path = None
 
     # base_line model
     from keras_demo import models
-    model = models.create_model(args, 0.6, 886, vocab)
+    model = models.create_model(args, 0.6, max_time_steps, vocab)
+    optim = keras.optimizers.rmsprop(lr=0.001)
+    model.compile(loss="mse", optimizer=optim, metrics=["mean_squared_error"])
     model.fit(train_x, train_y, nb_epoch=10, batch_size=32)
-    pred = model.predict(test_x).flatten()
+    pred = model.predict(dev_x).flatten()
     in_start = time.time()
 
     evl = Evaluator(
         dataset, prompt_id, 'None',
-        np.array(test_y_org).astype('int'),
-        np.array(test_y_org).astype('int')
+        np.array(dev_y_org).astype('int'),
+        np.array(dev_y_org).astype('int')
     )
     evl.feature_evaluate(pred, pred)
     in_time = time.time() - in_start

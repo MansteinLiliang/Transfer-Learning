@@ -3,7 +3,7 @@ import itertools
 import numpy as np
 import tensorflow as tf
 
-from utils import *
+from .utils import *
 from collections import Counter
 from nltk.tokenize import TreebankWordTokenizer
 

@@ -41,7 +41,7 @@ class NVDM(Model):
     self.lr = tf.train.exponential_decay(
         learning_rate, self.step, 10000, decay_rate, staircase=True, name="lr")
 
-    _ = tf.scalar_summary("learning rate", self.lr)
+    _ = tf.summary.scalar("learning rate", self.lr)
 
     self.dataset = dataset
     self._attrs = ["h_dim", "embed_dim", "max_iter", "dataset",
@@ -81,9 +81,9 @@ class NVDM(Model):
     self.optim = tf.train.AdamOptimizer(learning_rate=self.lr) \
                          .minimize(self.loss, global_step=self.step)
 
-    _ = tf.scalar_summary("encoder loss", self.e_loss)
-    _ = tf.scalar_summary("generator loss", self.g_loss)
-    _ = tf.scalar_summary("total loss", self.loss)
+    _ = tf.summary.scalar("encoder loss", self.e_loss)
+    _ = tf.summary.scalar("generator loss", self.g_loss)
+    _ = tf.summary.scalar("total loss", self.loss)
 
   def build_encoder(self):
     """Inference Network. q(h|X)"""
@@ -102,10 +102,10 @@ class NVDM(Model):
 
       self.h = tf.add(self.mu, tf.mul(self.sigma, self.eps))
 
-      _ = tf.histogram_summary("mu", self.mu)
-      _ = tf.histogram_summary("sigma", self.sigma)
-      _ = tf.histogram_summary("h", self.h)
-      _ = tf.histogram_summary("mu + sigma", self.mu + self.sigma)
+      _ = tf.summary.histogram("mu", self.mu)
+      _ = tf.summary.histogram("sigma", self.sigma)
+      _ = tf.summary.histogram("h", self.h)
+      _ = tf.summary.histogram("mu + sigma", self.mu + self.sigma)
 
   def build_generator(self):
     """Inference Network. p(X|h)"""
@@ -120,9 +120,8 @@ class NVDM(Model):
       return self.sess.run(self.mu, feed_dict={self.x: x, self.x_idx: x_idx})
 
   def train(self, config):
-    merged_sum = tf.merge_all_summaries()
-    writer = tf.train.SummaryWriter("./logs/%s" % self.get_model_dir(), self.sess.graph_def)
-
+    merged_sum = tf.summary.merge_all()
+    writer = tf.train.summary.FileWriter("./logs/%s" % self.get_model_dir(), self.sess.graph_def)
     tf.initialize_all_variables().run()
     # self.load(self.checkpoint_dir)
 

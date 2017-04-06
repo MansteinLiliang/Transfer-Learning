@@ -31,10 +31,10 @@ def create_model(args, initial_mean_value, overal_maxlen, vocab):
     dropout_W = 0.5  # default=0.5
     dropout_U = 0.5  # default=0.1
     cnn_border_mode = 'same'
-    if initial_mean_value.ndim == 0:
-        initial_mean_value = np.expand_dims(initial_mean_value, axis=1)
-    num_outputs = len(initial_mean_value)
-
+    # if initial_mean_value.ndim == 0:
+    #     initial_mean_value = np.expand_dims(initial_mean_value, axis=1)
+    # num_outputs = len(initial_mean_value)
+    num_outputs = 1
     if args.model_type == 'cls':
         raise NotImplementedError
 
