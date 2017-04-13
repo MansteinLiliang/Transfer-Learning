@@ -40,6 +40,10 @@ LEARNING TO PLAY CHESS DIFFERENTLY(ICLR2017)
 	3. Automatic Features for Essay Scoring – An Empirical Study
 	4. Automated Essay Scoring by Maximizing Human-machine Agreement
 	5. A Neural Approach to Automated Essay Scoring
+22. domain adaption（baseline等）
+	1. Deep Domain Confusion： Maximizing for Domain Invariance（2014）：视觉上的文章，主要是用增加一个botton-net layer加入MMD loss
+	2. 稍微传统一些的做法：降噪AE，SCL(Structural Correspondence Learning method), mSDA(Incorporating Domain and Sentiment Supervision in Representation Learning for Domain Adaptation),TDA(Deep Learning of Transferable Representation for Scalable Domain Adaptation：有cross-sentiment的实验，但是大部分实验都是由tf-idf的表示来文本学习的)
+	3. Adversarial Deep Averaging Networks for Cross-Lingual Sentiment Classification（跨语言的训练，用adversarial训练方法训练DAN：未来工作可以换成LSTM）：作为baseline（for 程昊）
 
 
 
